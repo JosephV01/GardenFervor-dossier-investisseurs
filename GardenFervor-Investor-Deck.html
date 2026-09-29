@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GardenFervor — Dossier Investisseurs</title>
+<meta name="description" content="Dossier factuel GardenFervor, RoadMap V3. Simulation de jardinage, agriculture, construction et production sur Unreal Engine 5.8.3. Socle persistant SaveVersion 17. Dernier jalon commité : J81. J82 en cours.">
+<meta name="author" content="GardenFervor">
+<meta name="theme-color" content="#101612">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GardenFervor — Dossier Investisseurs">
+<meta property="og:description" content="État réel du projet selon la RoadMap V3 : socle jouable persistant, Unreal Engine 5.8.3, SaveVersion 17, jalon commité J81, atelier J82 en cours.">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="assets/gardenfervor-hero.jpg">
+<meta property="og:image:alt" content="Illustration conceptuelle d’une propriété cultivée. Ce n’est pas une capture du jeu.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GardenFervor — Dossier Investisseurs">
+<meta name="twitter:description" content="RoadMap V3. Unreal Engine 5.8.3. SaveVersion 17. J81 commité, J82 en cours. Document factuel, sans capture présentée à tort comme du gameplay.">
+<meta name="twitter:image" content="assets/gardenfervor-hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101612'/%3E%3Cpath d='M16 25V12' stroke='%23c6a56a' stroke-width='1.4'/%3E%3Cpath d='M16 16c-4-1-6-4-6-7 4 0 6 3 6 7zm0 0c4-1 6-4 6-7-4 0-6 3-6 7z' fill='%237dba86'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#101612;
+  --bg-2:#171f1a;
+  --ink:#e7efe4;
+  --muted:#b7c3b6;
+  --faint:#8ea092;
+  --line:rgba(231,239,228,.12);
+  --green:#8fbf96;
+  --green-deep:#1c3b2a;
+  --earth:#c6a56a;
+  --earth-dim:rgba(198,165,106,.16);
+  --glass:rgba(255,255,255,.045);
+  --shadow:0 24px 60px rgba(0,0,0,.28);
+  --sans:"Segoe UI",system-ui,-apple-system,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --max:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+  radial-gradient(1200px 500px at 80% -10%, rgba(143,191,150,.14), transparent 55%),
+  radial-gradient(900px 420px at -10% 20%, rgba(198,165,106,.08), transparent 50%),
+  var(--bg);
+  color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65}
+img{max-width:100%;height:auto}
+a{color:var(--green);text-underline-offset:3px}
+a:hover{color:#d7ecda}
+:focus-visible{outline:2px solid var(--earth);outline-offset:3px}
+.skip{position:absolute;left:16px;top:-40px;background:#fff;color:#111;padding:8px 12px;z-index:20}
+.skip:focus{top:12px}
+.wrap{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(16px);background:rgba(16,22,18,.92);border-bottom:1px solid var(--line)}
+section,header.hero{scroll-margin-top:84px}
+.nav-inner{width:min(var(--max),calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.brand{font-family:var(--serif);letter-spacing:.16em;font-size:13px;color:var(--ink);text-decoration:none}
+.nav-toggle{display:none;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font:inherit;font-size:13px}
+.nav-links{display:flex;flex-wrap:wrap;gap:16px 18px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.04em}
+.nav-links a:hover{color:var(--ink)}
+header.hero{padding:72px 0 28px}
+.kicker{display:block;color:var(--earth);letter-spacing:.18em;text-transform:uppercase;font-size:12px;font-weight:650;margin-bottom:14px}
+h1,h2,h3{font-family:var(--serif);font-weight:560;letter-spacing:-.02em;line-height:1.08}
+h1{font-size:clamp(56px,9vw,104px);margin:0}
+h1 span{display:block}
+h2{font-size:clamp(32px,4vw,48px);margin:0 0 16px}
+h3{font-size:22px;margin:0 0 8px}
+.tagline{font-family:var(--serif);font-size:clamp(26px,3vw,36px);margin:18px 0 12px;color:#f3f6f1}
+.lede{max-width:46rem;color:var(--muted);font-size:18px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.pill{border:1px solid var(--line);background:var(--glass);border-radius:999px;padding:7px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.status-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;border:1px solid transparent;white-space:nowrap}
+.b-exist{color:#d9f5df;background:#1d4630;border-color:#3e7a52}
+.b-valid{color:#e7f8ea;background:#245c38;border-color:#8fbf96}
+.b-now{color:#2a2112;background:#e2c48a;border-color:#c6a56a}
+.b-plan{color:#d5e4f5;background:#243246;border-color:#6d88a8}
+.b-concept{color:#e7efe4;background:#2c3833;border-color:#8ea092}
+.b-vision{color:#f3e7cf;background:#3a3122;border-color:#c6a56a}
+.hero-figure{margin:36px 0 0;position:relative}
+.hero-figure img{width:100%;height:auto;border-radius:22px;display:block;box-shadow:var(--shadow)}
+.hero-note{position:absolute;left:16px;bottom:16px;right:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.hero-note p{margin:0;color:#f7f4ee;font-size:13px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+section{padding:72px 0}
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:22px;padding:22px}
+.dash{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.metric{padding:18px 16px}
+.metric b{display:block;font-family:var(--serif);font-size:28px;font-weight:560;color:#f4f7f2}
+.metric span{display:block;margin-top:6px;color:var(--faint);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.flow{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin:8px 0 0}
+.flow span{background:var(--green-deep);color:#e9f6eb;border:1px solid rgba(143,191,150,.35);border-radius:999px;padding:8px 14px;font-size:14px}
+.flow i{display:block;width:1px;height:16px;margin-left:22px;background:rgba(198,165,106,.7);font-style:normal}
+.note{color:var(--muted);font-size:15px}
+ul.clean,ol.clean{margin:8px 0 0;padding-left:18px}
+ul.clean li,ol.clean li{margin:4px 0}
+.domain{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.domain h3{font-size:20px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--faint);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:650}
+.phase{margin-top:28px}
+.phase h3{font-size:18px;color:var(--earth)}
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.row strong{font-family:var(--serif);font-size:16px}
+.arch{display:flex;flex-direction:column;gap:10px}
+.arch .box{border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:rgba(28,59,42,.35)}
+.arch .box small{display:block;color:var(--faint);margin-top:4px}
+.arrow-down{text-align:center;color:var(--earth);letter-spacing:.2em;font-size:12px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+figure{margin:0}
+button.shot{display:block;width:100%;padding:0;border:0;background:transparent;border-radius:16px;cursor:zoom-in;color:inherit;text-align:left}
+button.shot img{width:100%;border-radius:16px 16px 0 0;display:block;background:#0b0f0c}
+figcaption{padding:10px 2px 0;color:var(--muted);font-size:13px}
+figcaption .badge{margin-bottom:6px}
+dialog{width:min(980px,calc(100% - 28px));background:#0e1411;color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:16px}
+dialog::backdrop{background:rgba(0,0,0,.72)}
+dialog img{width:100%;height:auto;border-radius:12px}
+.dialog-bar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px}
+.dialog-bar button{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:inherit}
+footer{border-top:1px solid var(--line);padding:48px 0 64px;color:var(--muted)}
+footer strong{color:var(--ink);letter-spacing:.16em;font-size:13px}
+.sources{font-size:13px;color:var(--faint)}
+@media (max-width:900px){
+  .dash,.grid-3,.gallery{grid-template-columns:1fr 1fr}
+  .grid-2{grid-template-columns:1fr}
+  .nav-toggle{display:inline-flex}
+  .nav-links{display:none;position:absolute;left:0;right:0;top:100%;z-index:31;background:#101612;border-bottom:1px solid var(--line);padding:8px 20px 18px;flex-direction:column;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+  .nav-links.open{display:flex}
+}
+@media (max-width:640px){
+  .dash,.grid-3,.gallery,.row{grid-template-columns:1fr}
+  .wrap,.nav-inner{width:min(var(--max),calc(100% - 28px))}
+  section{padding:56px 0}
+  .hero-note{position:static;margin-top:10px}
+  .hero-note p{color:var(--muted);text-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+@media print{
+  nav,.nav-toggle,dialog{display:none !important}
+  body{background:#fff;color:#111}
+  a{color:#111}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<nav aria-label="Sections du dossier">
+  <div class="nav-inner">
+    <a class="brand" href="#contenu">GARDENFERVOR</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Sections</button>
+    <div class="nav-links" id="nav-links">
+      <a href="#projet">Projet</a>
+      <a href="#etat">État</a>
+      <a href="#existant">Existant</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#persistance">Persistance</a>
+      <a href="#roadmap">RoadMap</a>
+      <a href="#demontre">Démontré</a>
+      <a href="#reste">Suite</a>
+      <a href="#vision">Vision</a>
+      <a href="#galerie">Galerie</a>
+    </div>
+  </div>
+</nav>
+
+<main id="contenu">
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">Dossier investisseurs · relevé du dépôt le 29 septembre 2026</span>
+    <h1><span>GARDEN</span><span>FERVOR</span></h1>
+    <p class="tagline">Construire. Cultiver. Transformer.</p>
+    <p class="lede">Simulation réaliste mais ludique de jardinage, agriculture, paysagisme, construction, production et développement progressif d’une propriété vivante.</p>
+    <div class="status-row" aria-label="Indicateur d’état">
+      <span class="badge b-valid">RoadMap V3</span>
+      <span class="badge b-valid">J74 audité</span>
+      <span class="badge b-exist">J81 commité</span>
+      <span class="badge b-now">J82 en cours</span>
+    </div>
+    <div class="pills">
+      <span class="pill">Unreal Engine 5.8.3</span>
+      <span class="pill">C++</span>
+      <span class="pill">Data-driven</span>
+      <span class="pill">Persistent</span>
+      <span class="pill">Tested</span>
+    </div>
+    <figure class="hero-figure">
+      <img src="assets/gardenfervor-hero.jpg" width="2048" height="1152" alt="Illustration conceptuelle d’une propriété jardinée aboutie, avec serre, verger et bassin. Ce n’est pas une capture du jeu.">
+      <div class="hero-note">
+        <p>Illustration d’intention. Aucune image de ce dossier n’est une capture de gameplay.</p>
+        <span class="badge b-concept">CONCEPT</span>
+      </div>
+    </figure>
+  </div>
+</header>
+
+<section id="dashboard" aria-labelledby="dash-title">
+  <div class="wrap">
+    <h2 id="dash-title">Tableau de bord</h2>
+    <p class="lede">Chiffres lus dans le dépôt au moment de cette mise à jour. L’en-tête de la RoadMap V3 enregistre encore l’audit J74. Le code a avancé depuis.</p>
+    <div class="dash">
+      <article class="panel metric"><b>V3</b><span>RoadMap</span></article>
+      <article class="panel metric"><b>J81</b><span>Dernier jalon commité</span></article>
+      <article class="panel metric"><b>17</b><span>SaveVersion</span></article>
+      <article class="panel metric"><b>5.8.3</b><span>Unreal Engine</span></article>
+      <article class="panel metric"><b>bb1ebc4</b><span>HEAD</span></article>
+      <article class="panel metric"><b>Data-driven</b><span>Architecture</span></article>
+      <article class="panel metric"><b>Active</b><span>Persistance</span></article>
+      <article class="panel metric"><b>75</b><span>Fichiers de tests commités</span></article>
+    </div>
+    <p class="note" style="margin-top:16px">HEAD complet : <code>bb1ebc474cd6816fd7aeeb23877663da0273a5af</code>, message « J81: add crafting system ». La SaveVersion 16 citée par l’audit J74 correspond à la découverte encyclopédique. La version courante du schéma est 17, introduite pour l’état des contrats.</p>
+  </div>
+</section>
+
+<section id="projet">
+  <div class="wrap">
+    <span class="kicker">Le projet</span>
+    <h2>Une propriété qui se construit, pas seulement un jardin à arroser.</h2>
+    <div class="grid-2">
+      <div>
+        <p>GardenFervor est un jeu en vue première personne. Le joueur entretient un terrain, cultive, construit, stocke, vend, et fait progresser une propriété. Le moteur est Unreal Engine 5.8.3. La logique de jeu est écrite en C++. Blueprints et UMG servent à l’assemblage, à la présentation et à l’interface lorsque c’est le bon outil.</p>
+        <p>Le joueur développe progressivement une propriété vivante, productive, personnalisable et techniquement évolutive. Cette phrase décrit la direction du produit. Elle décrit aussi ce que le socle actuel commence à rendre possible. Elle décrit la suite de la RoadMap V3 pour tout ce qui n’est pas encore dans le jeu.</p>
+        <p class="note">Les statuts utilisés dans ce dossier sont stricts : <span class="badge b-exist">EXISTANT</span> <span class="badge b-valid">VALIDÉ</span> <span class="badge b-now">EN COURS</span> <span class="badge b-plan">PLANIFIÉ</span> <span class="badge b-vision">VISION</span>. Un système présent dans le code commité est existant. Un système cité comme validé par la RoadMap ou par l’audit J74 est validé. J82 est en cours parce que son travail est dans l’arbre de fichiers et n’est pas commité. Le reste de la RoadMap V3 est planifié.</p>
+      </div>
+      <div class="panel">
+        <h3>Trajectoire du produit</h3>
+        <p class="note">Cette chaîne est la progression visée. Elle est jouable aujourd’hui sur ses premiers maillons : terrain, culture, construction, inventaire, vente, objectifs. L’autonomie d’un domaine avancé reste devant.</p>
+        <div class="flow" aria-label="Progression visée">
+          <span>Petit jardin</span><i></i>
+          <span>Terrain cultivé</span><i></i>
+          <span>Propriété développée</span><i></i>
+          <span>Production</span><i></i>
+          <span>Autonomie</span><i></i>
+          <span>Domaine avancé</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="chrono">
+  <div class="wrap">
+    <span class="kicker">Chronologie du développement</span>
+    <h2>Le projet s’est construit par couches, puis par jalons V3.</h2>
+    <div class="flow">
+      <span>Fondation · terrain, inventaire, construction</span><i></i>
+      <span>Agriculture · sol, cultures, santé, qualité</span><i></i>
+      <span>Persistance · schéma de sauvegarde versionné</span><i></i>
+      <span>Environnement · UDS / UDW branchés au gameplay</span><i></i>
+      <span>Surfaces de culture · landscape et containers</span><i></i>
+      <span>Progression · objectifs, niveaux, déblocages</span><i></i>
+      <span>Production · conservation, transformation, crafting</span><i></i>
+      <span>Économie · prix, fraîcheur, contrats</span><i></i>
+      <span>Agriculture avancée · planifiée à partir de J83</span><i></i>
+      <span>Domaine vivant · planifié à partir de J90</span>
+    </div>
+    <p class="note">Le détail de chaque étape à partir de J75 est dans la RoadMap V3, plus bas.</p>
+  </div>
+</section>
+
+<section id="etat">
+  <div class="wrap">
+    <span class="kicker">État actuel du développement</span>
+    <h2>Où en est le dépôt, jalon par jalon.</h2>
+    <p class="lede">J74 est le dernier audit écrit dans la RoadMap V3. J75 à J81 sont des commits sur <code>master</code>. J82 est le travail ouvert. J83 à J108 sont les jalons officiels suivants, avec leurs intitulés.</p>
+
+    <div class="phase">
+      <h3>Socle audité</h3>
+      <div class="rows">
+        <div class="row"><strong>J74</strong><span>Audit du socle jouable et objectifs. Commit documenté 32b9e1c. SaveVersion alors à 16.</span><span class="badge b-valid">VALIDÉ</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase A — Consolidation de la progression existante</h3>
+      <div class="rows">
+        <div class="row"><strong>J75</strong><span>Consolidation de la progression existante. Commit 76f9ecb.</span><span class="badge b-exist">EXISTANT</span></div>
+        <div class="row"><strong>J76</strong><span>Intégration des déblocages au contenu réel. Commit e70cf88.</span><span class="badge b-exist">EXISTANT</span></div>
+        <div class="row"><strong>J77</strong><span>Contrats / commandes. Commit 4139dec. Le schéma passe en SaveVersion 17.</span><span class="badge b-exist">EXISTANT</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase B — Économie / production</h3>
+      <div class="rows">
+        <div class="row"><strong>J78</strong><span>Fraîcheur économique. Commit be41ea7.</span><span class="badge b-exist">EXISTANT</span></div>
+        <div class="row"><strong>J79</strong><span>Conservation. Commit 1d43160.</span><span class="badge b-exist">EXISTANT</span></div>
+        <div class="row"><strong>J80</strong><span>Transformation. Commit b15c838.</span><span class="badge b-exist">EXISTANT</span></div>
+        <div class="row"><strong>J81</strong><span>Crafting. Commit bb1ebc4. C’est le HEAD.</span><span class="badge b-exist">EXISTANT</span></div>
+        <div class="row"><strong>J82</strong><span>Atelier fonctionnel. Fichiers d’atelier présents dans l’arbre de travail, non commités.</span><span class="badge b-now">EN COURS</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase C — Parité agricole / environnement de culture</h3>
+      <div class="rows">
+        <div class="row"><strong>J83</strong><span>Parité Landscape / Containers.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J84</strong><span>Intégration environnementale Greenhouse.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J85</strong><span>Disease / Pest → Encounter gameplay.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase D — Eau / agriculture avancée</h3>
+      <div class="rows">
+        <div class="row"><strong>J86</strong><span>Irrigation.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J87</strong><span>Hydrologie.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J88</strong><span>Production agricole avancée.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase E — Économie avancée</h3>
+      <div class="rows">
+        <div class="row"><strong>J89</strong><span>Économie dynamique.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase F — Monde vivant</h3>
+      <div class="rows">
+        <div class="row"><strong>J90</strong><span>Animaux.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J91</strong><span>Production animale.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J92</strong><span>PNJ.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J93</strong><span>Monde vivant.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J94</strong><span>Événements.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase G — Environnement avancé</h3>
+      <div class="rows">
+        <div class="row"><strong>J95</strong><span>Actor Weather Status.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J96</strong><span>Matériaux environnementaux.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J97</strong><span>Audio environnemental.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J98</strong><span>Microclimats.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase H — Toolchain</h3>
+      <div class="rows">
+        <div class="row"><strong>J99</strong><span>Pipeline assets.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J100</strong><span>Scene / World Toolchain.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J101</strong><span>Validation assets.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J102</strong><span>Bibliothèque contenu.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase I — Présentation</h3>
+      <div class="rows">
+        <div class="row"><strong>J103</strong><span>Art Direction.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J104</strong><span>UX.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J105</strong><span>Visual Polish.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+      </div>
+    </div>
+    <div class="phase">
+      <h3>Phase J — Optimisation</h3>
+      <div class="rows">
+        <div class="row"><strong>J106</strong><span>Performance.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J107</strong><span>World Streaming.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+        <div class="row"><strong>J108</strong><span>Optimisation globale.</span><span class="badge b-plan">PLANIFIÉ</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="existant">
+  <div class="wrap">
+    <span class="kicker">Ce qui est réellement construit</span>
+    <h2>Les systèmes présents, domaine par domaine.</h2>
+    <p class="lede">Le contenu visuel reste en phase de fondation : beaucoup de représentations sont encore remplaçables. La liste ci-dessous porte sur la simulation, la donnée et la persistance.</p>
+
+    <div class="grid-3" style="margin-top:28px">
+      <article class="panel">
+        <div class="domain"><h3>Environnement</h3><span class="badge b-valid">VALIDÉ</span></div>
+        <ul class="clean">
+          <li>Ultra Dynamic Sky 9.7 et Ultra Dynamic Weather 9.7</li>
+          <li>Heure, date, vitesse de simulation, cycle jour / nuit</li>
+          <li>Saison, pluie, température, vent, nuages, météo</li>
+          <li>Passerelle <code>UGFUDSIntegrationSubsystem</code> vers un état environnemental lu par le gameplay</li>
+        </ul>
+        <p class="note">La pluie, la température et la saison alimentent déjà des règles agricoles. L’exposition fine des acteurs, les matériaux météo et les microclimats sont les jalons J95 à J98.</p>
+      </article>
+      <article class="panel">
+        <div class="domain"><h3>Terrain</h3><span class="badge b-valid">VALIDÉ</span></div>
+        <ul class="clean">
+          <li>Landscape continu 80 × 80 m, 5 × 5 components</li>
+          <li>25 parcelles de 16 × 16 m</li>
+          <li>Grille agricole logique 8 × 8, cellules de 2 × 2 m</li>
+          <li>Cette grille est une donnée. Elle est invisible dans le monde</li>
+          <li>Foliage en instances, mis à jour par événements</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <div class="domain"><h3>Agriculture</h3><span class="badge b-valid">VALIDÉ</span></div>
+        <ul class="clean">
+          <li>Sol, humidité, fertilité, compost, rotation</li>
+          <li>Plantation, croissance, santé, stress</li>
+          <li>Qualité de récolte et fraîcheur d’inventaire</li>
+          <li>Maladies et ravageurs comme état de culture, avec traitements</li>
+          <li>Cultures : carotte, tomate, tomate Roma, tomate cerise</li>
+          <li>Pommier : arbre conservé, récolte des fruits, cycle suivant</li>
+          <li>Surfaces : landscape et containers (planters)</li>
+        </ul>
+        <p class="note">La parité de simulation entre landscape et containers reste le jalon J83. Le déclenchement systématique des rencontres maladie / ravageur vers l’encyclopédie reste le jalon J85.</p>
+      </article>
+      <article class="panel">
+        <div class="domain"><h3>Construction</h3><span class="badge b-valid">VALIDÉ</span></div>
+        <ul class="clean">
+          <li>Définitions, catalogue, prévisualisation, placement</li>
+          <li>Rotation, sélection, déplacement, suppression</li>
+          <li>Snapping, dont un pas par défaut de 25 cm</li>
+          <li>Sauvegarde et restauration des placements</li>
+          <li>Buildables : chemin, surface, clôture, portail, abri, atelier, stockage, serre, planter, banc</li>
+        </ul>
+        <p class="note">La grille de construction est une logique de placement. Elle est distincte de la grille agricole de 2 m. Le bâtiment atelier existe. Son usage comme station de fabrication est le jalon J82, en cours. La serre se place. Son effet de protection météo sur les cultures est le jalon J84.</p>
+      </article>
+      <article class="panel">
+        <div class="domain"><h3>Inventaire et économie de base</h3><span class="badge b-valid">VALIDÉ</span></div>
+        <ul class="clean">
+          <li>Piles : définition, quantité, instance, qualité, fraîcheur</li>
+          <li>QuickBar de 9 emplacements</li>
+          <li>Outils et consommables : houe, arrosoir, faucille, graines, engrais, compost, traitement</li>
+          <li>Portefeuille en unité entière, achats, ventes</li>
+          <li>La qualité influence déjà le prix</li>
+          <li>Stockage de bâtiment : capacité, dépôt, retrait</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <div class="domain"><h3>Économie et production récentes</h3><span class="badge b-exist">EXISTANT</span></div>
+        <ul class="clean">
+          <li>J77 contrats et commandes, persistés en SaveVersion 17</li>
+          <li>J78 fraîcheur intégrée à la valeur de marché</li>
+          <li>J79 conservation, qui modifie la vitesse de dégradation</li>
+          <li>J80 transformation ressource vers produit</li>
+          <li>J81 crafting à partir de recettes et de l’inventaire</li>
+        </ul>
+        <p class="note">Le marché dynamique (offre, demande, saisonnalité des prix) reste J89. L’atelier qui relie le bâtiment Workshop à ces recettes reste J82.</p>
+      </article>
+    </div>
+
+    <div class="panel" style="margin-top:14px">
+      <div class="domain"><h3>Connaissance, objectifs, progression</h3><span class="badge b-valid">VALIDÉ</span></div>
+      <div class="grid-2">
+        <div>
+          <p>L’encyclopédie du vivant relie espèces, variétés, maladies, ravageurs et fiches de connaissance. Les définitions restent la source. La découverte du joueur est un état séparé, persisté depuis la SaveVersion 16, avec les niveaux : non découvert, découvert, observé, cultivé, compris, expert.</p>
+          <p class="note">Une fiche peut décrire un phénomène plus précisément que la simulation. Une information encyclopédique devient une mécanique seulement lorsqu’un jalon le décide.</p>
+        </div>
+        <div>
+          <p>Les objectifs écoutent les événements de jeu, progressent, se terminent et ne versent une récompense qu’une fois. La progression joueur, en place depuis J70, convertit ces accomplissements en points, niveau et déblocages. J75 a consolidé cette chaîne. J76 branche les déblocages sur le contenu réel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="wrap">
+    <span class="kicker">Architecture technique</span>
+    <h2>Chaque jalon s’ajoute à une chaîne, il ne la remplace pas.</h2>
+    <p class="lede">Le schéma ci-dessous reprend des systèmes présents dans le code. Les cases marquées planifié ou en cours indiquent le raccord prévu, pas une fonction déjà livrée.</p>
+    <div class="grid-2" style="margin-top:28px">
+      <div class="arch">
+        <div class="box">Environnement<br><small>UDS / UDW 9.7 → temps, saison, météo</small></div>
+        <div class="arrow-down">↓</div>
+        <div class="box">État environnemental GardenFervor<br><small>Passerelle unique. Le gameplay ne parle pas directement aux acteurs UDS.</small></div>
+        <div class="arrow-down">↓</div>
+        <div class="box">Agriculture<br><small>Sol, cultures, eau du sol, santé, qualité, fraîcheur. Irrigation et hydrologie : planifiées, J86 et J87.</small></div>
+        <div class="arrow-down">↓</div>
+        <div class="box">Récolte et ressources<br><small>Vers l’inventaire, avec qualité et fraîcheur.</small></div>
+        <div class="arrow-down">↓</div>
+        <div class="box">Inventaire → conservation → transformation → crafting<br><small>J79, J80, J81 existants. Atelier fonctionnel : J82, en cours.</small></div>
+        <div class="arrow-down">↓</div>
+        <div class="box">Économie<br><small>Portefeuille, prix, fraîcheur, contrats. Marché dynamique : J89, planifié.</small></div>
+        <div class="arrow-down">↓</div>
+        <div class="box">Objectifs et progression<br><small>Événement, progrès, récompense unique, niveau, déblocage de contenu.</small></div>
+      </div>
+      <div class="stack">
+        <article class="panel">
+          <h3>Règles déjà en place</h3>
+          <ul class="clean">
+            <li>Définitions de contenu séparées de l’état de partie</li>
+            <li>Identifiants stables pour les sauvegardes</li>
+            <li>Événements entre domaines, plutôt qu’un tick par plante ou par parcelle</li>
+            <li>La logique ne dépend pas de la présence permanente d’un acteur dans le monde</li>
+            <li>L’encyclopédie ne duplique pas la base de gameplay</li>
+            <li>Le schéma de sauvegarde est versionné et migre les parties anciennes</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Ce que cette architecture prépare</h3>
+          <p class="note">Un nouveau contenu — culture, recette, bâtiment, contrat — s’ajoute d’abord comme une définition. Un nouveau système arrive par jalon, avec son état, son service et sa persistance. C’est le mode de travail observé de J75 à J81.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="persistance">
+  <div class="wrap">
+    <span class="kicker">Persistance et robustesse</span>
+    <h2>La partie se sauvegarde. Le schéma a déjà vécu dix-sept versions.</h2>
+    <div class="grid-2">
+      <div>
+        <p>La sauvegarde stocke l’état de jeu : parcelles, sol, cultures, inventaire, constructions, objectifs, progression, découverte, contrats. Elle ne prend pas le rendu comme vérité. Les anciennes parties restent lisibles : la plus ancienne version supportée est la 1.</p>
+        <p>SaveVersion actuelle : <strong>17</strong>. Constante <code>GF::Save::SaveVersion</code>.</p>
+        <p class="note">Le dépôt commité contient 75 fichiers de tests automatisés, dont des tests de sauvegarde, de cultures, d’économie, de fraîcheur, de contrats, de conservation, de production, de crafting et de progression. Un fichier de tests d’atelier accompagne le travail J82 et n’est pas encore commité. Ce dossier ne reproduit pas un journal d’exécution de ces tests.</p>
+      </div>
+      <div class="panel">
+        <h3>Migrations enregistrées dans le code</h3>
+        <table>
+          <thead><tr><th>Version</th><th>Ajout de schéma</th></tr></thead>
+          <tbody>
+            <tr><td>5</td><td>Santé des cultures</td></tr>
+            <tr><td>6</td><td>Qualité d’inventaire</td></tr>
+            <tr><td>7</td><td>Fertilité du sol</td></tr>
+            <tr><td>8</td><td>Fraîcheur d’inventaire</td></tr>
+            <tr><td>9</td><td>Mémoire de rotation</td></tr>
+            <tr><td>10</td><td>Risques maladie et ravageur</td></tr>
+            <tr><td>11</td><td>Couverture de culture et slots de containers</td></tr>
+            <tr><td>12</td><td>Inventaire des bâtiments de stockage</td></tr>
+            <tr><td>13</td><td>État des objectifs</td></tr>
+            <tr><td>14</td><td>Progression du joueur</td></tr>
+            <tr><td>15</td><td>Origine du terrain et domaine 5 × 5</td></tr>
+            <tr><td>16</td><td>Découverte encyclopédique</td></tr>
+            <tr><td>17</td><td>État des contrats</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <span class="kicker">RoadMap V3</span>
+    <h2>La suite officielle, de J75 à J108.</h2>
+    <p class="lede">La RoadMap V3 est organisée en phases A à J. Les intitulés ci-dessous sont ceux du document. Le statut indique ce que le dépôt contient vraiment.</p>
+    <div class="panel" style="margin-top:22px">
+      <table>
+        <thead><tr><th>Jalon</th><th>Intitulé officiel</th><th>Statut</th></tr></thead>
+        <tbody>
+          <tr><td>J75</td><td>Consolidation de la progression existante</td><td><span class="badge b-exist">EXISTANT</span></td></tr>
+          <tr><td>J76</td><td>Intégration des déblocages au contenu réel</td><td><span class="badge b-exist">EXISTANT</span></td></tr>
+          <tr><td>J77</td><td>Contrats / commandes</td><td><span class="badge b-exist">EXISTANT</span></td></tr>
+          <tr><td>J78</td><td>Fraîcheur économique</td><td><span class="badge b-exist">EXISTANT</span></td></tr>
+          <tr><td>J79</td><td>Conservation</td><td><span class="badge b-exist">EXISTANT</span></td></tr>
+          <tr><td>J80</td><td>Transformation</td><td><span class="badge b-exist">EXISTANT</span></td></tr>
+          <tr><td>J81</td><td>Crafting</td><td><span class="badge b-exist">EXISTANT</span></td></tr>
+          <tr><td>J82</td><td>Atelier fonctionnel</td><td><span class="badge b-now">EN COURS</span></td></tr>
+          <tr><td>J83</td><td>Parité Landscape / Containers</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J84</td><td>Intégration environnementale Greenhouse</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J85</td><td>Disease / Pest → Encounter gameplay</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J86</td><td>Irrigation</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J87</td><td>Hydrologie</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J88</td><td>Production agricole avancée</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J89</td><td>Économie dynamique</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J90</td><td>Animaux</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J91</td><td>Production animale</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J92</td><td>PNJ</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J93</td><td>Monde vivant</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J94</td><td>Événements</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J95</td><td>Actor Weather Status</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J96</td><td>Matériaux environnementaux</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J97</td><td>Audio environnemental</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J98</td><td>Microclimats</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J99</td><td>Pipeline assets</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J100</td><td>Scene / World Toolchain</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J101</td><td>Validation assets</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J102</td><td>Bibliothèque contenu</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J103</td><td>Art Direction</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J104</td><td>UX</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J105</td><td>Visual Polish</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J106</td><td>Performance</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J107</td><td>World Streaming</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+          <tr><td>J108</td><td>Optimisation globale</td><td><span class="badge b-plan">PLANIFIÉ</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="demontre">
+  <div class="wrap">
+    <span class="kicker">Ce qui est déjà démontré</span>
+    <h2>Des faits présents dans le dépôt.</h2>
+    <div class="grid-3">
+      <article class="panel"><h3>Partie jouable</h3><p class="note">Boucle de culture, d’outils, de récolte, de vente et de construction sur un terrain persistant.</p><span class="badge b-valid">VALIDÉ</span></article>
+      <article class="panel"><h3>Environnement branché</h3><p class="note">Temps et météo UDS / UDW 9.7 traversent une passerelle avant d’atteindre l’agriculture.</p><span class="badge b-valid">VALIDÉ</span></article>
+      <article class="panel"><h3>Sauvegarde migrée</h3><p class="note">Schéma 17, lecture depuis la version 1, états de jeu restaurés entre sessions.</p><span class="badge b-valid">VALIDÉ</span></article>
+      <article class="panel"><h3>Données plutôt que classes par objet</h3><p class="note">Cultures, objets, bâtiments, recettes et connaissances sont des définitions.</p><span class="badge b-valid">VALIDÉ</span></article>
+      <article class="panel"><h3>Tests automatisés</h3><p class="note">75 fichiers de tests commités couvrent le socle et les jalons J75 à J81.</p><span class="badge b-exist">EXISTANT</span></article>
+      <article class="panel"><h3>Chaîne économique étendue</h3><p class="note">Qualité, fraîcheur, contrats, conservation, transformation et crafting sont dans HEAD.</p><span class="badge b-exist">EXISTANT</span></article>
+    </div>
+  </div>
+</section>
+
+<section id="reste">
+  <div class="wrap">
+    <span class="kicker">Ce qui reste à construire</span>
+    <h2>Le travail ouvert, puis les jalons qui suivent.</h2>
+    <div class="grid-2">
+      <article class="panel">
+        <h3>En cours</h3>
+        <p><span class="badge b-now">EN COURS</span> J82 — Atelier fonctionnel. Le bâtiment Workshop se place déjà. Le jalon le relie aux recettes de crafting. Ce travail n’est pas sur HEAD.</p>
+      </article>
+      <article class="panel">
+        <h3>Déjà dans HEAD, dans les mêmes familles</h3>
+        <p class="note">Conservation (J79), transformation (J80) et crafting (J81) sont commités. Contrats (J77) et fraîcheur économique (J78) aussi. Déblocages de contenu (J76) aussi. Ils ne font plus partie du reste à construire.</p>
+      </article>
+    </div>
+    <div class="grid-3" style="margin-top:14px">
+      <article class="panel">
+        <h3>Agriculture avancée</h3>
+        <ul class="clean">
+          <li>J83 parité landscape / containers <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>J84 serre et météo <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>J85 rencontres maladie / ravageur <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>J86 irrigation <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>J87 hydrologie <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>J88 production agricole avancée <span class="badge b-plan">PLANIFIÉ</span></li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3>Propriété</h3>
+        <ul class="clean">
+          <li>Parité des containers, J83 <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>Serre comme environnement de culture, J84 <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>Atelier utilisable, J82 <span class="badge b-now">EN COURS</span></li>
+          <li>Fonction future de l’abri, encore ouverte dans la RoadMap <span class="badge b-plan">PLANIFIÉ</span></li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3>Économie et monde</h3>
+        <ul class="clean">
+          <li>J89 économie dynamique <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>J90 à J94 animaux, production animale, PNJ, monde vivant, événements <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>J95 à J98 météo des acteurs, matériaux, audio, microclimats <span class="badge b-plan">PLANIFIÉ</span></li>
+          <li>J99 à J108 outils de contenu, direction artistique, UX, performance, streaming <span class="badge b-plan">PLANIFIÉ</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="vision">
+  <div class="wrap">
+    <span class="kicker">Vision · futur</span>
+    <h2>Ce que la propriété peut devenir si la RoadMap va au bout.</h2>
+    <div class="grid-2">
+      <div>
+        <p><span class="badge b-vision">VISION</span></p>
+        <p>GardenFervor peut progressivement évoluer vers une propriété où le terrain, l’agriculture, l’eau, la production, le stockage, la transformation, l’artisanat, l’économie et la construction se répondent, jusqu’à une forme d’autonomie et un domaine vivant.</p>
+        <div class="flow">
+          <span>Terrain</span><i></i>
+          <span>Agriculture</span><i></i>
+          <span>Eau</span><i></i>
+          <span>Production</span><i></i>
+          <span>Stockage</span><i></i>
+          <span>Transformation</span><i></i>
+          <span>Artisanat</span><i></i>
+          <span>Économie</span><i></i>
+          <span>Construction</span><i></i>
+          <span>Autonomie</span><i></i>
+          <span>Domaine vivant</span>
+        </div>
+        <p class="note">L’eau, les animaux, les PNJ et le marché dynamique sont devant, aux jalons J86, J87, J89 et J90. Les illustrer ne les rend pas disponibles.</p>
+      </div>
+      <figure class="panel">
+        <button class="shot" type="button" data-full="assets/gardenfervor-future-domain.jpg" data-caption="Vision d’un domaine abouti. Illustration, pas une capture.">
+          <img src="assets/gardenfervor-future-domain.jpg" width="2096" height="1184" alt="Illustration d’un domaine abouti au lever du jour, avec verger, serre et bassin." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-vision">VISION</span><br>Horizon de propriété. Les ruches, le bassin et la densité visuelle ne sont pas l’état du jeu.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="differenciation">
+  <div class="wrap">
+    <span class="kicker">Caractéristiques structurelles</span>
+    <h2>Ce que l’architecture rend déjà observable.</h2>
+    <div class="grid-2">
+      <article class="panel">
+        <h3>Simulation interconnectée</h3>
+        <p class="note">Les systèmes produisent des conséquences d’un domaine à l’autre :</p>
+        <div class="flow">
+          <span>Environnement</span><i></i>
+          <span>Conditions de culture</span><i></i>
+          <span>Santé</span><i></i>
+          <span>Qualité</span><i></i>
+          <span>Récolte</span><i></i>
+          <span>Stockage</span><i></i>
+          <span>Transformation</span><i></i>
+          <span>Valeur</span><i></i>
+          <span>Économie</span><i></i>
+          <span>Progression</span>
+        </div>
+        <p class="note">Les maillons jusqu’à la transformation et la valeur de fraîcheur sont dans HEAD. L’irrigation et le marché dynamique prolongeront cette chaîne plus tard.</p>
+      </article>
+      <div class="stack">
+        <article class="panel">
+          <h3>Persistance</h3>
+          <p class="note">Les décisions du joueur — sol, plantations, stocks, bâtiments, objectifs, découvertes, contrats — sont écrites dans une sauvegarde versionnée et relues à la session suivante.</p>
+        </article>
+        <article class="panel">
+          <h3>Propriété évolutive</h3>
+          <p class="note">Le terrain de 80 × 80 m et les parcelles forment une base sur laquelle l’agriculture et les constructions s’empilent. L’eau, les serres actives, les ateliers et les systèmes fonctionnels s’y ajoutent par jalon.</p>
+        </article>
+        <article class="panel">
+          <h3>Architecture extensible</h3>
+          <p class="note">J75 à J81 ont chacun ajouté un maillon — déblocages, contrats, prix de fraîcheur, conservation, transformation, crafting — sans remplacer le socle audité en J74.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie">
+  <div class="wrap">
+    <span class="kicker">Galerie</span>
+    <h2>Illustrations d’intention. Zéro capture de jeu.</h2>
+    <p class="lede">Ces images décrivent une ambiance et un horizon. Elles ne montrent ni l’interface actuelle, ni le niveau de finition visuelle, ni un système planifié comme s’il était jouable. Aucune n’a le badge « gameplay réel ».</p>
+    <div class="gallery" style="margin-top:28px">
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-gameplay-foundation.jpg" data-caption="Concept. La grille agricole réelle est invisible. Ce n’est pas une capture.">
+          <img src="assets/gardenfervor-gameplay-foundation.jpg" width="2096" height="1184" alt="Illustration de planches de culture. Concept, pas une capture du jeu." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Planches et ficelles dessinées. La grille du projet est une donnée logique de 2 m, sans ce quadrillage visuel.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-environment-weather.jpg" data-caption="Concept météo. UDS et UDW existent. Cette image n’est pas le ciel du jeu.">
+          <img src="assets/gardenfervor-environment-weather.jpg" width="2096" height="1184" alt="Illustration d’un jardin sous la pluie." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>La pluie gameplay existe via UDW. Le rendu de cette image est une illustration.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-agriculture-closeup.jpg" data-caption="Concept de culture. Tomate et autres plantes. Pas une capture.">
+          <img src="assets/gardenfervor-agriculture-closeup.jpg" width="2096" height="1184" alt="Illustration rapprochée de tomates et de feuilles mouillées." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>La tomate est une culture du projet. Le plant photographié ici est une illustration.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-construction-system.jpg" data-caption="Concept de chantier. Le placement existe. Le bassin et le fantôme cyan ne documentent pas l’outil réel.">
+          <img src="assets/gardenfervor-construction-system.jpg" width="2096" height="1184" alt="Illustration d’un chantier de jardin avec un volume translucide." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Le placement de constructions existe. Cette scène, son volume bleu et son bassin ne sont pas l’outil du jeu.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-property-progression.jpg" data-caption="Vision de propriété développée. Pas l’état jouable complet.">
+          <img src="assets/gardenfervor-property-progression.jpg" width="2240" height="1120" alt="Illustration d’une propriété jardinée étendue." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-vision">VISION</span><br>Image d’une propriété aboutie. La trajectoire jardin → domaine n’est pas entièrement jouable.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-01-environnement-temps.jpg" data-caption="Concept d’ambiance lié au temps. Pas une capture UDS.">
+          <img src="assets/gardenfervor-detail-01-environnement-temps.jpg" width="1600" height="1600" alt="Illustration d’ambiance liée au temps et au jardin." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Temps et saisons sont simulés. Cette image ne montre pas l’interface.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-02-sol-humidite-fertilite.jpg" data-caption="Concept de sol. Humidité et fertilité existent comme données.">
+          <img src="assets/gardenfervor-detail-02-sol-humidite-fertilite.jpg" width="1600" height="1600" alt="Illustration de sol cultivé." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Humidité et fertilité sont des états persistants. L’image reste une illustration.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-03-plantation-croissance.jpg" data-caption="Concept de plantation et de croissance.">
+          <img src="assets/gardenfervor-detail-03-plantation-croissance.jpg" width="1600" height="1600" alt="Illustration de jeunes plants." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Plantation et croissance sont simulées. Le visuel des plants n’est pas celui du jeu.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-04-sante-qualite-fraicheur.jpg" data-caption="Concept autour de la santé, de la qualité et de la fraîcheur.">
+          <img src="assets/gardenfervor-detail-04-sante-qualite-fraicheur.jpg" width="1600" height="1600" alt="Illustration de légumes récoltés." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Santé, qualité et fraîcheur sont des données. L’image ne les affiche pas.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-05-recolte-economie-marche.jpg" data-caption="Concept de récolte et de marché. Le marché dynamique est planifié en J89.">
+          <img src="assets/gardenfervor-detail-05-recolte-economie-marche.jpg" width="1600" height="1600" alt="Illustration d’un étal de récolte." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Vente, qualité et fraîcheur existent. Le marché dynamique de J89 n’est pas construit.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-06-construction-catalogue.jpg" data-caption="Concept de catalogue de construction. Le catalogue gameplay existe, cette image non.">
+          <img src="assets/gardenfervor-detail-06-construction-catalogue.jpg" width="1600" height="1600" alt="Illustration de matériaux et de plans de construction." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Le catalogue de buildables existe dans le jeu. Ce visuel n’est pas son interface.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-07-persistance-outils.jpg" data-caption="Concept. Le texte SAVE VERSION écrit dans le carnet est fictif et ne correspond pas à la SaveVersion 17.">
+          <img src="assets/gardenfervor-detail-07-persistance-outils.jpg" width="1600" height="1600" alt="Illustration d’un établi avec des outils et un carnet. Le texte du carnet est fictif." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Le carnet mentionne une « save version » imaginaire. La SaveVersion du projet est 17, dans le code, pas dans cette image.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-08-production-transformation.jpg" data-caption="Concept de transformation. Le système J80 existe. Cette scène de conserves n’est pas le jeu.">
+          <img src="assets/gardenfervor-detail-08-production-transformation.jpg" width="1600" height="1600" alt="Illustration d’une table de conserves et de tomates." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>La transformation existe comme système. Les bocaux, le kimchi et la scène ne sont pas une capture.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-09-propriete-verger-maison.jpg" data-caption="Concept de verger et de maison. Le pommier existe. La maison aboutie est une vision.">
+          <img src="assets/gardenfervor-detail-09-propriete-verger-maison.jpg" width="1600" height="1600" alt="Illustration d’un verger devant une maison." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-concept">CONCEPT</span><br>Le pommier est une culture pérenne du projet. La propriété dessinée va au-delà de l’état visuel actuel.</figcaption>
+      </figure>
+      <figure>
+        <button class="shot" type="button" data-full="assets/gardenfervor-detail-10-monde-vivant-animaux.jpg" data-caption="Vision. Les animaux sont le jalon J90, non construit.">
+          <img src="assets/gardenfervor-detail-10-monde-vivant-animaux.jpg" width="1600" height="1600" alt="Illustration d’un jardin avec poules, ruches et un lapin." loading="lazy" decoding="async">
+        </button>
+        <figcaption><span class="badge b-vision">VISION</span><br>Animaux, ruches et faune de bassin relèvent des jalons J87 et J90 à J93. Ils ne sont pas dans le jeu.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>GARDENFERVOR</strong>
+    <p>Simulation réaliste mais ludique de jardinage, agriculture, construction, production et développement progressif d’une propriété.</p>
+    <p>Unreal Engine 5.8.3<br>C++<br>RoadMap V3</p>
+    <p>© GardenFervor</p>
+    <p class="sources">Sources du relevé : RoadMap V3 pour les intitulés J75–J108 et le socle audité en J74 ; HEAD <code>bb1ebc4</code> ; <code>GFSaveTypes.h</code> pour la SaveVersion 17 ; définitions de cultures carotte, tomate, Roma, cerise et pommier ; 75 fichiers de tests commités. Aucune adresse, société ou contact n’est indiqué ici, faute d’information officielle dans ces sources.</p>
+  </div>
+</footer>
+
+<dialog id="lightbox" aria-label="Image agrandie">
+  <div class="dialog-bar">
+    <p id="lightbox-caption" style="margin:0"></p>
+    <button type="button" id="lightbox-close">Fermer</button>
+  </div>
+  <img id="lightbox-img" alt="">
+</dialog>
+<script>
+(function () {
+  var toggle = document.querySelector(".nav-toggle");
+  var links = document.getElementById("nav-links");
+  if (toggle && links) {
+    toggle.addEventListener("click", function () {
+      var open = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    links.addEventListener("click", function (event) {
+      if (event.target.tagName === "A") {
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+  var dialog = document.getElementById("lightbox");
+  var img = document.getElementById("lightbox-img");
+  var cap = document.getElementById("lightbox-caption");
+  var closeBtn = document.getElementById("lightbox-close");
+  if (!dialog || !img) return;
+  document.querySelectorAll(".shot").forEach(function (button) {
+    var label = button.getAttribute("data-caption") || "Agrandir l’illustration";
+    button.setAttribute("aria-label", label);
+    button.addEventListener("click", function () {
+      img.src = button.getAttribute("data-full");
+      img.alt = button.querySelector("img").alt;
+      cap.textContent = button.getAttribute("data-caption") || "";
+      if (typeof dialog.showModal === "function") dialog.showModal();
+    });
+  });
+  closeBtn.addEventListener("click", function () { dialog.close(); });
+  dialog.addEventListener("click", function (event) {
+    if (event.target === dialog) dialog.close();
+  });
+})();
+</script>
+</body>
+</html>
